@@ -1,0 +1,4 @@
+[09-May-2025 05:20:19 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\View\Component" not found in /home/topcvdwkpxw/public_html/app/View/Components/HeroHeader.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/topcvdwkpxw/public_html/app/View/Components/HeroHeader.php on line 9

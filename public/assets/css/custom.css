@@ -1,0 +1,43 @@
+.preview-thumb {
+    width: 500px;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+.text-bold {
+    font-weight: bold;
+}
+.text-danger {
+    color: red;
+}
+.a_link {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #000;
+}
+.alert-notication-custom {
+    background-color: #fff !important;
+    border-radius: 10px !important;
+    border-left: 5px solid rgba(35, 183, 229) !important;
+    font-size: 0.9rem !important;
+    box-shadow: -6px 4px 10px #cccccc87;
+}
+.card-body {
+    padding: 0;
+}
+.alert-notication-custom .text-noticate {
+    margin-bottom: 0px;
+}
+@media (max-width: 991px) {
+    .alert-notication-custom {
+        text-align: justify;
+        line-height: 1.8;
+    }
+}
+@media (max-width: 480px) {
+    .card-body {
+        padding: 0;
+    }
+}

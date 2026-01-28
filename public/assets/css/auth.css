@@ -1,0 +1,89 @@
+/* Google Login Button Styles */
+.social-login {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.social-login-text {
+    color: #666;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.social-login-text::before,
+.social-login-text::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    width: 50%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.social-login-text::before {
+    left: 0;
+}
+
+.social-login-text::after {
+    right: 0;
+}
+
+.social-login-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+a.google-login-btn,
+a.facebook-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover hiệu ứng mượt và bóng đổ */
+.google-login-btn:hover,
+.facebook-login-btn:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Màu xanh dương tươi cho Google */
+.google-login-btn {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+/* Add styles for logout button */
+.nav__action form button.action__link {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+    border: 2px solid var(--primary-color) !important;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Giữ Facebook màu cũ hoặc chỉnh nhẹ */
+.facebook-login-btn {
+    background-color: #3b5998;
+}
+
+/* Icon cách chữ, đồng bộ size */
+.google-login-btn i,
+.facebook-login-btn i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Font chữ đều nhau */
+.google-login-btn span,
+.facebook-login-btn span {
+    font-size: 1.5rem;
+    color: var(--text-color);
+}

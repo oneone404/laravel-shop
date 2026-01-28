@@ -1,0 +1,398 @@
+/* Services Cards Styling - Gen Z Edition */
+.service-section {
+    padding: 50px 0;
+    background-color: transparent;
+}
+
+.section-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary-color), var(--second-color));
+    border-radius: 3px;
+}
+
+/* Service Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+    }
+}
+
+/* Product Card Component */
+.product-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+    padding-bottom: 15px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--primary-color);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.product-name {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 15px 10px 10px;
+    color: var(--text-color);
+}
+
+.product-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.status-label {
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.status-ready {
+    color: var(--teal);
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.product-action {
+    border: 1.5px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: var(--border-radius-pill);
+    padding: 8px 15px;
+    font-weight: 700;
+    font-size: 12px;
+    margin: auto 15px 15px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.product-card:hover .product-action {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Hack Grid Layout */
+.hack-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+    .hack-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Hack Card Component */
+.hack-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.hack-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border-color: var(--primary-color);
+}
+
+.hack-top {
+    padding: 12px 14px;
+    background: linear-gradient(90deg, #000080, #0000FF);
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.hack-name {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.status-dot.active {
+    background-color: #00cc4b;
+}
+
+.status-dot.inactive {
+    background-color: #ff3b30;
+}
+
+.hack-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 30%;
+    object-fit: cover;
+    background: var(--bg-card);
+    padding: 2px;
+    border: 1px solid var(--border-color);
+}
+
+.hack-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    transition: transform .35s ease;
+}
+
+.hack-bottom {
+    padding: 15px;
+    background: var(--bg-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Cyber Button Styles (extracted from view) */
+.cybr-btn {
+    --primary-hue: 226;
+    --primary-lightness: 46;
+    --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 46) * 1%));
+    --shadow-primary-hue: 180;
+    --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
+    --shadow-secondary-hue: 60;
+    --shadow-secondary: hsl(var(--shadow-secondary-hue), 90%, 60%);
+    --color: #fff;
+    --font-size: 15px;
+    --label-size: 9px;
+    --border: 4px;
+    --shimmy-distance: 5;
+
+    position: relative;
+    isolation: isolate;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-width: 180px;
+    height: 48px;
+    color: var(--color);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+
+    --clip: polygon(0 0, 100% 0, 100% 100%, 95% 100%, 95% 90%, 85% 90%, 85% 100%, 8% 100%, 0 70%);
+}
+
+.cybr-btn::before,
+.cybr-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: var(--clip);
+    z-index: 0;
+}
+
+.cybr-btn::before {
+    background: var(--shadow-primary);
+    transform: translate(var(--border), 0);
+}
+
+.cybr-btn::after {
+    background: var(--primary);
+}
+
+.cybr-btn__content {
+    position: relative;
+    z-index: 1;
+}
+
+.cybr-btn__glitch {
+    position: absolute;
+    top: calc(var(--border) * -1);
+    left: calc(var(--border) * -1);
+    right: calc(var(--border) * -1);
+    bottom: calc(var(--border) * -1);
+    background: var(--shadow-primary);
+    display: none;
+    z-index: 0;
+    animation: glitch 2s infinite;
+}
+
+.cybr-btn:hover .cybr-btn__glitch {
+    display: block;
+}
+
+.cybr-btn__tag {
+    position: absolute;
+    padding: 1px 4px;
+    bottom: -5%;
+    right: 5%;
+    font-weight: 600;
+    color: #000;
+    font-size: var(--label-size);
+    background: #fffd;
+    border-radius: 3px;
+}
+
+@keyframes glitch {
+    0% {
+        clip-path: polygon(0 2%, 100% 2%, 100% 95%, 0 95%);
+    }
+
+    20% {
+        clip-path: polygon(0 78%, 100% 78%, 100% 100%, 0 100%);
+    }
+
+    40% {
+        clip-path: polygon(0 44%, 100% 44%, 100% 54%, 0 54%);
+    }
+
+    60% {
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+
+    80% {
+        clip-path: polygon(0 40%, 100% 40%, 100% 85%, 0 85%);
+    }
+
+    100% {
+        clip-path: polygon(0 63%, 100% 63%, 100% 80%, 0 80%);
+    }
+}
+
+/* Hack Detail Specific Styles */
+.hack-detail {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.hack-detail__header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hack-detail__title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.download-track {
+    background: var(--bg-light);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 25px;
+    border: 1px solid var(--border-color);
+}
+
+.download-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.download-link {
+    color: var(--primary-color);
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.download-link:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .hack-detail {
+        padding: 20px;
+    }
+
+    .hack-detail__title {
+        font-size: 1.8rem;
+    }
+
+    .cybr-btn {
+        min-width: 150px;
+        height: 40px;
+        font-size: 13px;
+    }
+}

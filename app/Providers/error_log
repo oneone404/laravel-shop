@@ -1,0 +1,8 @@
+[09-May-2025 05:20:04 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Support\Providers\RouteServiceProvider" not found in /home/topcvdwkpxw/public_html/app/Providers/RouteServiceProvider.php:11
+Stack trace:
+#0 {main}
+  thrown in /home/topcvdwkpxw/public_html/app/Providers/RouteServiceProvider.php on line 11
+[09-May-2025 05:20:07 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Foundation\Support\Providers\EventServiceProvider" not found in /home/topcvdwkpxw/public_html/app/Providers/EventServiceProvider.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/topcvdwkpxw/public_html/app/Providers/EventServiceProvider.php on line 10

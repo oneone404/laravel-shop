@@ -1,0 +1,4 @@
+[09-May-2025 06:44:14 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Support\Facades\Facade" not found in /home/topcvdwkpxw/public_html/app/Facades/ConfigHelper.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/topcvdwkpxw/public_html/app/Facades/ConfigHelper.php on line 16

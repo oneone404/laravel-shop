@@ -1,0 +1,8 @@
+[09-May-2025 04:06:56 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Mail\Mailable" not found in /home/topcvdwkpxw/public_html/app/Mail/TestMail.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/topcvdwkpxw/public_html/app/Mail/TestMail.php on line 19
+[09-May-2025 06:05:16 UTC] PHP Fatal error:  Uncaught Error: Class "Illuminate\Mail\Mailable" not found in /home/topcvdwkpxw/public_html/app/Mail/TestMail.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/topcvdwkpxw/public_html/app/Mail/TestMail.php on line 19
