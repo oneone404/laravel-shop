@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <a href="{{ route('tools') }}" class="menu__item">
+            <a href="{{ route('tools.index') }}" class="menu__item">
                 <i class="fas fa-tools"></i>CÔNG CỤ
             </a>
 

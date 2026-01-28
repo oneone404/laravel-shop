@@ -12,6 +12,7 @@ use App\Http\Controllers\User\RandomCategoryController;
 use App\Http\Controllers\User\RandomAccountController;
 use App\Http\Controllers\User\WithdrawalController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\ToolController;
 use App\Http\Controllers\GameKeyController;
 use App\Http\Controllers\AddKeyVipController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -19,8 +20,6 @@ use App\Http\Controllers\BuyIosController;
 use App\Http\Controllers\DrawController;
 use App\Http\Controllers\UgPhoneController;
 use App\Http\Controllers\HackGameController;
-use App\Http\Controllers\User\FakeIdController;
-use App\Http\Controllers\User\FishIdController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Admin\GameHackController;
@@ -45,18 +44,23 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/api.php';
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/tools', [HomeController::class, 'tools'])->name('tools');
+
+// Trung tâm Công cụ
+Route::prefix('tools')->name('tools.')->group(function () {
+    Route::get('/', [ToolController::class, 'index'])->name('index');
+    Route::get('/gift-code', [ToolController::class, 'giftCode'])->name('gift-code');
+    Route::get('/fish-id', [ToolController::class, 'fishId'])->name('fish-id');
+    Route::get('/fake-id', [ToolController::class, 'fakeId'])->name('fake-id');
+});
+
 Route::delete('/packages/{package}', [ServicePackageController::class, 'destroy'])
     ->name('admin.packages.destroy');
 
 Route::get('/DOWNLOAD/{id}', [HackGameController::class, 'download'])->name('download.hack');
 Route::get('/GETKEY/{id}', [HackGameController::class, 'getKey'])->name('get.key');
-Route::get('/gift-code', function () {
-    return view('user.gift-code');
-})->name('gift-code');
 
-Route::get('/fake', [FakeIdController::class, 'index'])->name('fake');
-Route::get('/fish', [FishIdController::class, 'index'])->name('user.fish');
+Route::get('/fake', [ToolController::class, 'fakeId'])->name('fake');
+Route::get('/fish', [ToolController::class, 'fishId'])->name('user.fish');
 Route::post('/user/get-role-name', [\App\Http\Controllers\User\ServiceOrderController::class, 'getRoleName'])
     ->name('service.getRoleName');
 
