@@ -59,11 +59,15 @@
                 </div>
             </div>
 
-            <a href="#" class="menu__item"><i class="fas fa-newspaper"></i> BÀI VIẾT</a>
+            <a href="#" class="menu__item">
+                <i class="fas fa-tools"></i>CÔNG CỤ
+            </a>
 
-            <?php if(Auth::check() && Auth()->user()->role === 'admin'): ?>
-                <a href="<?php echo e(route('admin.index')); ?>" target="_blank" class="menu__item"><i class="fas fa-user-shield"></i>
-                    ADMIN</a>
+            <!-- Không Cần Thêm Cho Admin -->
+            <?php if(Auth::check() && Auth()->user()->role === 'seller'): ?>
+                <a href="<?php echo e(route('seller.dashboard')); ?>" target="_blank" class="menu__item"><i
+                        class="fas fa-user-shield"></i>
+                    SELLER</a>
             <?php endif; ?>
 
             <button class="btn btn--icon theme-toggle-btn">
@@ -205,5 +209,4 @@
             }
         });
     });
-</script>
-<?php /**PATH C:\Users\LEGION\Documents\Sources\shop\resources\views/layouts/user/header.blade.php ENDPATH**/ ?>
+</script><?php /**PATH C:\Users\LEGION\Documents\Sources\shop\resources\views/layouts/user/header.blade.php ENDPATH**/ ?>

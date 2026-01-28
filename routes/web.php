@@ -45,6 +45,7 @@ require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/api.php';
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/tools', [HomeController::class, 'tools'])->name('tools');
 Route::delete('/packages/{package}', [ServicePackageController::class, 'destroy'])
     ->name('admin.packages.destroy');
 
@@ -59,7 +60,7 @@ Route::get('/fish', [FishIdController::class, 'index'])->name('user.fish');
 Route::post('/user/get-role-name', [\App\Http\Controllers\User\ServiceOrderController::class, 'getRoleName'])
     ->name('service.getRoleName');
 
-Route::prefix('admin/game-hack')->name('admin.game-hack.')->middleware(['auth','admin'])->group(function() {
+Route::prefix('admin/game-hack')->name('admin.game-hack.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('/', [GameHackController::class, 'index'])->name('index');
     Route::get('/create', [GameHackController::class, 'create'])->name('create');
     Route::post('/store', [GameHackController::class, 'store'])->name('store');
@@ -82,7 +83,7 @@ Route::post('/shop', [NapGoiController::class, 'login'])->name('nap-goi.login');
 Route::post('/nap-goi/change', [NapGoiController::class, 'changeID'])->name('nap-goi.change');
 
 Route::middleware(['auth', 'check.user.status'])->group(function () {
-Route::prefix('profile')->name('profile.')->group(function () {
+    Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name(name: 'index');
         Route::get('/change-password', [ProfileController::class, 'viewChangePassword'])->name('change-password');
         Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change-password.update');
@@ -118,21 +119,21 @@ Route::prefix('profile')->name('profile.')->group(function () {
 
     });
     // Routes for lucky wheel categories
-Route::prefix('lucky')->name('lucky.')->group(function () {
-    Route::get('/', [LuckyCategoryController::class, 'showAll'])->name('show-all');
-    Route::get('/wheel/{slug}', function ($slug) {
-        if (filter_var(env('WHEEL_MAINTENANCE'), FILTER_VALIDATE_BOOLEAN)) {
-            return view('user.404'); // hoặc view('user.baotri')
-        }
-        return app(LuckyCategoryController::class)->index($slug);
-    })->name('index');
-    Route::post('/wheel/{slug}/spin', [LuckyCategoryController::class, 'spin'])->name('spin');
+    Route::prefix('lucky')->name('lucky.')->group(function () {
+        Route::get('/', [LuckyCategoryController::class, 'showAll'])->name('show-all');
+        Route::get('/wheel/{slug}', function ($slug) {
+            if (filter_var(env('WHEEL_MAINTENANCE'), FILTER_VALIDATE_BOOLEAN)) {
+                return view('user.404'); // hoặc view('user.baotri')
+            }
+            return app(LuckyCategoryController::class)->index($slug);
+        })->name('index');
+        Route::post('/wheel/{slug}/spin', [LuckyCategoryController::class, 'spin'])->name('spin');
 
-});
+    });
 
-Route::get('/pay/card', [ProfileController::class, 'depositCard'])->name('profile.deposit-card');
-Route::get('/pay/bank', [ProfileController::class, 'depositAtm'])->name('profile.deposit-atm');
-Route::post('/pay/card', [CardDepositController::class, 'processCardDeposit']);
+    Route::get('/pay/card', [ProfileController::class, 'depositCard'])->name('profile.deposit-card');
+    Route::get('/pay/bank', [ProfileController::class, 'depositAtm'])->name('profile.deposit-atm');
+    Route::post('/pay/card', [CardDepositController::class, 'processCardDeposit']);
 });
 
 Route::prefix('admin')->name('admin.')->middleware('admin')->group(function () {
@@ -150,7 +151,7 @@ Route::prefix('show')->name('category.')->group(function () {
     Route::get('/{slug}', [GameCategoryController::class, 'index'])->name('index');
 });
 
-Route::get('/user/balance', function() {
+Route::get('/user/balance', function () {
     return response()->json([
         'balance' => Auth::user()->balance
     ]);
@@ -184,12 +185,12 @@ Route::prefix('random')->name('random.')->group(function () {
 // Các route KHÔNG cần đăng nhập
 Route::post('/check-discount', [\App\Http\Controllers\GameKeyController::class, 'checkDiscount'])->name('discount.check');
 
-    Route::get('/muakey', [GameKeyController::class, 'showForm'])->name('gamekey.form');
-    Route::post('/ajax/get-device-info', [GameKeyController::class, 'ajaxGetDeviceInfo'])->name('user.ajax.get-device-info');
+Route::get('/muakey', [GameKeyController::class, 'showForm'])->name('gamekey.form');
+Route::post('/ajax/get-device-info', [GameKeyController::class, 'ajaxGetDeviceInfo'])->name('user.ajax.get-device-info');
 Route::get('/nhankey', [GameKeyController::class, 'getKey'])
     ->name('gamekey.getkey');
 Route::get('/buy-ios', [BuyIosController::class, 'showForm'])->name('buy-ios');
-    Route::post('/buy-ios', [BuyIosController::class, 'purchase'])->name('buy-ios.purchase');
+Route::post('/buy-ios', [BuyIosController::class, 'purchase'])->name('buy-ios.purchase');
 
 // 🔒 Routes CẦN đăng nhập + Rate limiting cho mua key
 Route::middleware(['auth', 'check.user.status'])->group(function () {
@@ -213,16 +214,16 @@ Route::middleware(['auth', 'check.user.status'])->group(function () {
     Route::get('admin/add-key', [AddKeyVipController::class, 'showForm'])->name('add-key.show');
     Route::post('admin/add-key', [AddKeyVipController::class, 'store'])->name('add-key.store');
     Route::get('/api/check-history', function () {
-    // Chỉ cần gửi request tới API mà không trả về gì
-    $url = 'https://oneone.io.vn/api/auto-bank-deposit';
-    Http::get($url);
-    return response()->json(['status' => 'Request sent']);
-});
+        // Chỉ cần gửi request tới API mà không trả về gì
+        $url = 'https://oneone.io.vn/api/auto-bank-deposit';
+        Http::get($url);
+        return response()->json(['status' => 'Request sent']);
+    });
 
-Route::middleware(['auth', 'check.user.status'])->group(function () {
-    Route::get('/ug-phone', [UgPhoneController::class, 'index'])->name('ug-phone.index');
-    Route::post('/ug-phone/purchase', [UgPhoneController::class, 'purchase'])->name('ug-phone.purchase');
-});
+    Route::middleware(['auth', 'check.user.status'])->group(function () {
+        Route::get('/ug-phone', [UgPhoneController::class, 'index'])->name('ug-phone.index');
+        Route::post('/ug-phone/purchase', [UgPhoneController::class, 'purchase'])->name('ug-phone.purchase');
+    });
 });
 
 Route::get('/lucky/history/{slug}', [LuckyCategoryController::class, 'getHistoryHtml'])->name('lucky.history');
@@ -273,16 +274,16 @@ Route::prefix('pay/order')->name('direct-payment.')->group(function () {
     // Tạo đơn hàng - cho cả guest và user - Giới hạn 3 đơn/phút
     Route::post('/account/{accountId}', [DirectPaymentController::class, 'createAccountOrder'])->name('create-account');
     Route::post('/random/{categoryId}', [DirectPaymentController::class, 'createRandomOrder'])->name('create-random');
-    
+
     // Xem trang thanh toán QR
     Route::get('/{orderCode}', [DirectPaymentController::class, 'show'])->name('show');
-    
+
     // API check status (polling)
     Route::get('/{orderCode}/check', [DirectPaymentController::class, 'checkStatus'])->name('check');
-    
+
     // Xem kết quả
     Route::get('/{orderCode}/success', [DirectPaymentController::class, 'result'])->name('result');
-    
+
     // Tải file TXT
     Route::get('/{orderCode}/download', [DirectPaymentController::class, 'downloadTxt'])->name('download');
 });

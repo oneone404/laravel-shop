@@ -59,11 +59,15 @@
                 </div>
             </div>
 
-            <a href="#" class="menu__item"><i class="fas fa-newspaper"></i> BÀI VIẾT</a>
+            <a href="{{ route('tools') }}" class="menu__item">
+                <i class="fas fa-tools"></i>CÔNG CỤ
+            </a>
 
-            @if (Auth::check() && Auth()->user()->role === 'admin')
-                <a href="{{ route('admin.index') }}" target="_blank" class="menu__item"><i class="fas fa-user-shield"></i>
-                    ADMIN</a>
+            <!-- Không Cần Thêm Cho Admin -->
+            @if (Auth::check() && Auth()->user()->role === 'seller')
+                <a href="{{ route('seller.dashboard') }}" target="_blank" class="menu__item"><i
+                        class="fas fa-user-shield"></i>
+                    SELLER</a>
             @endif
 
             <button class="btn btn--icon theme-toggle-btn">

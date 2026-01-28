@@ -133,4 +133,9 @@ class HomeController extends Controller
             'totalTransactions'
         ));
     }
+
+    public function tools()
+    {
+        return view('user.tools');
+    }
 }

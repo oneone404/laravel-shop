@@ -149,7 +149,7 @@
 
 .product-badge {
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 3px 10px;
   border-radius: 8px;
   background: transparent;
@@ -473,7 +473,7 @@
 .modal__total-value {
     font-size: 20px !important;
     color: #0E3EDA !important;
-    font-weight: 800 !important;
+    font-weight: 700 !important;
 }
 
 .modal__input {
