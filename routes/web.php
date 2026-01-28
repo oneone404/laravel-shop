@@ -45,8 +45,8 @@ require __DIR__ . '/admin.php';
 require __DIR__ . '/api.php';
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Trung tâm Công cụ
-Route::prefix('tools')->name('tools.')->group(function () {
+// Trung tâm Ứng dụng
+Route::prefix('apps')->name('apps.')->group(function () {
     Route::get('/', [ToolController::class, 'index'])->name('index');
     Route::get('/gift-code', [ToolController::class, 'giftCode'])->name('gift-code');
     Route::get('/fish-id', [ToolController::class, 'fishId'])->name('fish-id');
@@ -61,7 +61,7 @@ Route::get('/GETKEY/{id}', [HackGameController::class, 'getKey'])->name('get.key
 
 Route::get('/fake', [ToolController::class, 'fakeId'])->name('fake');
 Route::get('/fish', [ToolController::class, 'fishId'])->name('user.fish');
-Route::post('/user/get-role-name', [\App\Http\Controllers\User\ServiceOrderController::class, 'getRoleName'])
+Route::post('/user/get-role-name', [ServiceOrderController::class, 'getRoleName'])
     ->name('service.getRoleName');
 
 Route::prefix('admin/game-hack')->name('admin.game-hack.')->middleware(['auth', 'admin'])->group(function () {
@@ -187,7 +187,7 @@ Route::prefix('random')->name('random.')->group(function () {
 });
 
 // Các route KHÔNG cần đăng nhập
-Route::post('/check-discount', [\App\Http\Controllers\GameKeyController::class, 'checkDiscount'])->name('discount.check');
+Route::post('/check-discount', [GameKeyController::class, 'checkDiscount'])->name('discount.check');
 
 Route::get('/muakey', [GameKeyController::class, 'showForm'])->name('gamekey.form');
 Route::post('/ajax/get-device-info', [GameKeyController::class, 'ajaxGetDeviceInfo'])->name('user.ajax.get-device-info');
@@ -257,7 +257,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/downloads/{hack}', [DownloadController::class, 'latestByHack'])
     ->name('download.hack.json');
 
-Route::get('/check', [\App\Http\Controllers\DownloadController::class, 'activeDownloads']);
+Route::get('/check', [DownloadController::class, 'activeDownloads']);
 
 Route::get('/hacks', [HackGameController::class, 'index'])->name('hacks.index');
 Route::get('/hacks/{hack}', [HackGameController::class, 'show'])->name('hacks.show');

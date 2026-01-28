@@ -166,7 +166,7 @@
                     <p class="tool-desc">Hệ thống nhập mã quà tặng Zing với tỷ lệ thành công cao, nhận quà ngay lập tức.</p>
                 </div>
                 <div class="tool-action">
-                    <a href="{{ route('tools.gift-code') }}" class="btn btn--primary btn-tool">
+                    <a href="{{ route('apps.gift-code') }}" class="btn btn--primary btn-tool">
                         Sử Dụng Ngay <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
@@ -185,7 +185,7 @@
                     <p class="tool-desc">Tra cứu nhanh mã ID của các loại cá và vật phẩm rác trong game để setup Auto.</p>
                 </div>
                 <div class="tool-action">
-                    <a href="{{ route('tools.fish-id') }}" class="btn btn--primary btn-tool">
+                    <a href="{{ route('apps.fish-id') }}" class="btn btn--primary btn-tool">
                         Tra Cứu ID <i class="fas fa-search-plus"></i>
                     </a>
                 </div>
@@ -204,7 +204,7 @@
                     <p class="tool-desc">Danh sách mã vùng câu hỗ trợ tính năng chuyển vùng (Global/VN) và Fake Region.</p>
                 </div>
                 <div class="tool-action">
-                    <a href="{{ route('tools.fake-id') }}" class="btn btn--primary btn-tool">
+                    <a href="{{ route('apps.fake-id') }}" class="btn btn--primary btn-tool">
                         Xem Danh Sách <i class="fas fa-list-ul"></i>
                     </a>
                 </div>

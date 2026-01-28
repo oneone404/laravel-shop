@@ -15,7 +15,7 @@ class ToolController extends Controller
      */
     public function index()
     {
-        return view('user.tools.index');
+        return view('user.apps.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class ToolController extends Controller
      */
     public function giftCode()
     {
-        return view('user.tools.gift-code');
+        return view('user.apps.gift-code');
     }
 
     /**
@@ -119,7 +119,7 @@ class ToolController extends Controller
         ksort($rainbowMap);
         ksort($purpleMap);
 
-        return view('user.tools.fish-id', compact(
+        return view('user.apps.fish-id', compact(
             'fishMap',
             'trashMap',
             'rainbowMap',
@@ -157,6 +157,6 @@ class ToolController extends Controller
             return $a['id'] <=> $b['id'];
         });
 
-        return view('user.tools.fake-id', compact('fakeIds'));
+        return view('user.apps.fake-id', compact('fakeIds'));
     }
 }
