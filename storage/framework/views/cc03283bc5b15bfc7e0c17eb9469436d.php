@@ -20,12 +20,12 @@
 
                 // VVIP
                 5 => 'linear-gradient(135deg,
-                                                    #F9A8D4,
-                                                    #FDE68A,
-                                                    #6EE7B7,
-                                                    #93C5FD,
-                                                    #E9A8F2
-                                                )',
+                                                            #F9A8D4,
+                                                            #FDE68A,
+                                                            #6EE7B7,
+                                                            #93C5FD,
+                                                            #E9A8F2
+                                                        )',
 
                 default => '#E5E7EB',
             };
@@ -166,10 +166,10 @@
                         </td>
                         <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <td class="fish-cell" data-grade="<?php echo e($item['grade']); ?>" data-type="<?php echo e($item['type']); ?>" style="
-                                                                            background: <?php echo e(gradeColor($item['grade'])); ?>;
-                                                                            color: <?php echo e(gradeTextColor($item['grade'])); ?>;
-                                                                            font-weight: <?php echo e($item['grade'] >= 4 ? 'bold' : 'normal'); ?>;
-                                                                        ">
+                                                                                        background: <?php echo e(gradeColor($item['grade'])); ?>;
+                                                                                        color: <?php echo e(gradeTextColor($item['grade'])); ?>;
+                                                                                        font-weight: <?php echo e($item['grade'] >= 4 ? 'bold' : 'normal'); ?>;
+                                                                                    ">
                                 <?php echo e($item['name']); ?>
 
                             </td>

@@ -148,95 +148,6 @@
 
 /* 2. Gift Code Tool (gift-code.blade.php)
    ========================================================================== */
-.gift-code-container {
-    max-width: 850px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
-
-.gift-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 40px;
-    box-shadow: var(--glass-shadow);
-}
-
-.gift-card h4 {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--primary-color);
-    margin-bottom: 30px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.dark-mode .gift-card h4 {
-    color: #fff;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-label {
-    display: block;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: var(--text-color);
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.dark-mode .form-label {
-    color: var(--text-lighter);
-}
-
-.glass-input {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 15px 20px;
-    color: var(--text-color);
-    font-size: 1.5rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.dark-mode .glass-input {
-    background: rgba(0, 0, 0, 0.2);
-    color: #fff;
-}
-
-.glass-input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(14, 62, 218, 0.1);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.btn-submit {
-    width: 100%;
-    padding: 16px;
-    border-radius: 14px;
-    font-weight: 800;
-    font-size: 1.5rem;
-    margin-top: 10px;
-}
-
-#result .alert {
-    border-radius: 12px;
-    padding: 15px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-top: 20px;
-    border: none;
-}
-
 .alert-success {
     background: rgba(16, 185, 129, 0.1);
     color: #10b981;
@@ -248,67 +159,63 @@
 }
 
 .alert-info {
-    background: rgba(59, 130, 246, 0.1);
-    color: #3b82f6;
+    padding: 15px !important;
 }
 
 .glass-textarea {
+    min-height: 160px;
+    line-height: 1.6;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 1.3rem;
+    padding: 15px !important;
+    background: var(--bg-light) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 10px !important;
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 15px 20px;
-    color: var(--text-color);
-    font-size: 1.4rem;
-    font-weight: 500;
-    font-family: 'Courier New', Courier, monospace;
-    transition: all 0.3s ease;
     resize: vertical;
-    min-height: 120px;
-}
-
-.dark-mode .glass-textarea {
-    background: rgba(0, 0, 0, 0.2);
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .glass-textarea:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(14, 62, 218, 0.1);
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 3px rgba(14, 62, 218, 0.1) !important;
 }
 
 .helper-text {
     font-size: 1.2rem;
     color: var(--text-light);
-    margin-top: 6px;
-    font-style: italic;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.8;
 }
 
 .bulk-results {
-    margin-top: 30px;
+    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 .result-item {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 12px 20px;
+    background: var(--bg-light);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 1.35rem;
-    animation: fadeIn 0.3s ease forwards;
+    animation: fadeIn 0.4s ease forwards;
+    transition: all 0.3s ease;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(5px);
+        transform: translateY(10px);
     }
 
     to {
@@ -317,22 +224,44 @@
     }
 }
 
+.result-item:hover {
+    border-color: var(--primary-color);
+    background: rgba(14, 62, 218, 0.03);
+}
+
 .result-id {
     font-weight: 700;
+    color: var(--text-color);
+    width: 180px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.result-id i {
     color: var(--primary-color);
-    width: 140px;
 }
 
 .result-code {
-    font-family: monospace;
-    color: var(--text-color);
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--primary-color);
     flex: 1;
-    margin: 0 10px;
+    margin: 0 15px;
+    background: rgba(14, 62, 218, 0.05);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 1.25rem;
 }
 
 .result-status {
-    font-weight: 600;
+    font-weight: 800;
     text-align: right;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 1.2rem;
 }
 
 .status-pending {
@@ -347,17 +276,7 @@
     color: #ef4444;
 }
 
-.import-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
 
-@media (max-width: 768px) {
-    .import-row {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* 3. Table Tools (Fish ID & Fake ID)
    ========================================================================== */

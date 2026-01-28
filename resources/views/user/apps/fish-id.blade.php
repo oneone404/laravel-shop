@@ -20,12 +20,12 @@
 
                 // VVIP
                 5 => 'linear-gradient(135deg,
-                                                    #F9A8D4,
-                                                    #FDE68A,
-                                                    #6EE7B7,
-                                                    #93C5FD,
-                                                    #E9A8F2
-                                                )',
+                                                            #F9A8D4,
+                                                            #FDE68A,
+                                                            #6EE7B7,
+                                                            #93C5FD,
+                                                            #E9A8F2
+                                                        )',
 
                 default => '#E5E7EB',
             };
@@ -145,10 +145,10 @@
                         </td>
                         @foreach($items as $item)
                             <td class="fish-cell" data-grade="{{ $item['grade'] }}" data-type="{{ $item['type'] }}" style="
-                                                                            background: {{ gradeColor($item['grade']) }};
-                                                                            color: {{ gradeTextColor($item['grade']) }};
-                                                                            font-weight: {{ $item['grade'] >= 4 ? 'bold' : 'normal' }};
-                                                                        ">
+                                                                                        background: {{ gradeColor($item['grade']) }};
+                                                                                        color: {{ gradeTextColor($item['grade']) }};
+                                                                                        font-weight: {{ $item['grade'] >= 4 ? 'bold' : 'normal' }};
+                                                                                    ">
                                 {{ $item['name'] }}
                             </td>
                         @endforeach
