@@ -1,401 +1,670 @@
 @extends('layouts.user.app')
 
-@section('title', 'Danh Sách ID Cá')
+@section('title', 'Danh Sách ID')@section('content')<style>
+    .table-container {
+        max-width: 100%;
+        margin: 0 auto;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        border: 1px solid #cbd5e1;
+        overflow-x: auto;
+    }
 
-@section('content')
-    <style>
-        .tools-sub-container {
-            max-width: 1248px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+    .blue-table {
+        width: max-content;
+        min-width: 600px;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 14px;
+    }
 
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: var(--glass-shadow);
-        }
+    .blue-table thead {
+        background-color: #1d4ed8;
+        color: #ffffff;
+    }
 
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-            background: rgba(14, 62, 218, 0.03);
-            padding: 24px;
-            border-radius: 20px;
-            border: 1px solid var(--border-color);
-        }
+    .blue-table th {
+        text-align: left;
+        padding: 8px 12px;
+        font-weight: 600;
+        border: 1px solid #cbd5e1;
+    }
 
-        .switch-group {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-            justify-content: center;
-        }
+    .blue-table td {
+        padding: 8px 12px;
+        border: 1px solid #cbd5e1;
+        color: #1e293b;
+        word-break: break-word;
+        white-space: normal;
+        vertical-align: middle;
+    }
 
-        .glass-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            user-select: none;
-        }
+    .check-col {
+        width: 50px;
+        text-align: center;
+    }
 
-        .glass-toggle:hover {
-            background: rgba(14, 62, 218, 0.05);
-        }
+    .blue-table td:not(:first-child):not(.check-col) {
+        max-width: 180px;
+    }
 
-        .glass-toggle input {
-            display: none;
-        }
+    .blue-table tbody tr:nth-child(even) {
+        background-color: #f8fafc;
+    }
 
-        .glass-toggle input:checked+span {
-            color: var(--primary-color);
-            font-weight: 800;
-        }
+    .blue-table tbody tr:hover {
+        background-color: #e0f2fe;
+    }
 
-        .glass-toggle input:checked+span i {
-            transform: scale(1.2);
-        }
+    .tab {
+        cursor: pointer;
+        padding: 6px 12px;
+        font-weight: 600;
+        color: #1e3a8a;
+        border-bottom: 2px solid transparent;
+    }
 
-        .grade-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
+    .tab.active {
+        color: #3b82f6;
+        border-color: #3b82f6;
+    }
 
-        .grade-pill {
-            cursor: pointer;
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border: 2px solid transparent;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            opacity: 0.5;
-            display: flex;
-            align-items: center;
+    .filter-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-bottom: 20px;
+        background: #f8fafc;
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .grade-checkboxes {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .grade-check, .type-check {
+        display: none;
+    }
+
+    .grade-label {
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 2px solid transparent;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        opacity: 0.6;
+    }
+
+    .grade-check:checked + .grade-label, 
+    .type-check:checked + .grade-label {
+        opacity: 1;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        border-color: rgba(0,0,0,0.2);
+    }
+
+    /* Colors for labels */
+    .label-g1 { background: #f2faf3ff; color: #14532D; border: 1px solid #cbd5e1; }
+    .label-g2 { background: #6EE7B7; color: #065F46; }
+    .label-g3 { background: #93C5FD; color: #1E3A8A; }
+    .label-g4 { background: #E9A8F2; color: #701A75; }
+    .label-g5 { background: linear-gradient(135deg, #F9A8D4, #FDE68A, #6EE7B7, #93C5FD, #E9A8F2); color: #1F2937; }
+
+    .label-fish { 
+        background: #ffffff; 
+        color: #166534; 
+        border: 2px solid #bbf7d0; 
+        font-size: 14px !important;
+    }
+    .type-check:checked + .label-fish {
+        background: #dcfce7;
+        border-color: #22c55e;
+        color: #15803d;
+    }
+
+    .label-trash { 
+        background: #ffffff; 
+        color: #475569; 
+        border: 2px solid #e2e8f0;
+        font-size: 14px !important;
+    }
+    .type-check:checked + .label-trash {
+        background: #f1f5f9;
+        border-color: #64748b;
+        color: #1e293b;
+    }
+
+    .filter-separator {
+        height: 1px;
+        background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+        margin: 10px 0;
+        border: none;
+    }
+
+    /* ===== MODERN SWITCH ===== */
+    .switch-container {
+        display: flex;
+        gap: 30px;
+        align-items: center;
+        justify-content: center;
+        padding: 2px 5px;
+    }
+
+    .switch-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .switch-text {
+        font-size: 13px;
+        font-weight: 600;
+        color: #334155;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 42px;
+        height: 22px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: #cbd5e1;
+        transition: .3s;
+        border-radius: 34px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .3s;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    input:checked + .slider.fish { background-color: #22c55e; }
+    input:checked + .slider.trash { background-color: #22c55e; }
+
+    input:checked + .slider:before {
+        transform: translateX(20px);
+    }
+
+    .action-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .copy-btn {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        color: #fff;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .copy-btn i {
+        font-size: 16px;
+    }
+
+    /* Modern Checkboxes */
+    input[type="checkbox"].row-checkbox, 
+    input[type="checkbox"]#selectAll {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: #fff;
+        margin: 0;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #cbd5e1;
+        border-radius: 6px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        outline: none;
+    }
+
+    input[type="checkbox"].row-checkbox::before,
+    input[type="checkbox"]#selectAll::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        transform: scale(0);
+        transition: 0.2s transform cubic-bezier(0.4, 0, 0.2, 1);
+        background-color: #fff;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        display: block;
+    }
+
+    input[type="checkbox"].row-checkbox:checked,
+    input[type="checkbox"]#selectAll:checked {
+        background-color: #1d4ed8;
+        border-color: #1d4ed8;
+        box-shadow: 0 2px 8px rgba(29, 78, 216, 0.3);
+    }
+
+    input[type="checkbox"].row-checkbox:checked::before,
+    input[type="checkbox"]#selectAll:checked::before {
+        transform: scale(1);
+    }
+
+    input[type="checkbox"].row-checkbox:hover,
+    input[type="checkbox"]#selectAll:hover {
+        border-color: #3b82f6;
+    }
+
+    .search-wrap {
+        position: relative;
+        flex: 1;
+        max-width: 400px;
+    }
+
+    .search-wrap i {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #94a3b8;
+    }
+
+    .search-wrap input {
+        padding-left: 36px;
+        border-radius: 8px;
+        border: 1px solid #cbd5e1;
+    }
+
+    /* ===== MOBILE RESPONSIVE ===== */
+    @media (max-width: 768px) {
+        .filter-controls {
+            padding: 10px;
             gap: 8px;
         }
 
-        .grade-pill input {
-            display: none;
-        }
-
-        .grade-pill:has(input:checked) {
-            opacity: 1;
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .g1 {
-            background: #e2e8f0;
-            color: #475569;
-        }
-
-        .g2 {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .g3 {
-            background: #dbeafe;
-            color: #1e40af;
-        }
-
-        .g4 {
-            background: #f3e8ff;
-            color: #6b21a8;
-        }
-
-        .g5 {
-            background: linear-gradient(135deg, #f9a8d4, #fde68a, #93c5fd);
-            color: #1e293b;
-        }
-
-        .action-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .switch-container {
             gap: 20px;
-            margin-top: 20px;
+            justify-content: center;
         }
 
-        .search-box {
-            position: relative;
-            flex: 1;
-            max-width: 400px;
+        .grade-checkboxes {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+            margin-bottom: 5px !important;
         }
 
-        .search-box i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
+        .grade-label {
+            padding: 8px 6px;
+            font-size: 11px;
         }
 
-        .search-box input {
+        /* Đưa Cầu Vồng chiếm full 2 cột cho đẹp */
+        .grade-label.label-g5 {
+            grid-column: span 2;
+        }
+
+        .action-bar {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+
+        .copy-btn {
             width: 100%;
-            padding: 12px 15px 12px 45px;
-            background: rgba(0, 0, 0, 0.02);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-color);
-            font-weight: 600;
+            justify-content: center;
+            padding: 10px;
         }
 
-        .dark-mode .search-box input {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
+        .search-wrap {
+            max-width: none;
         }
 
-        .fish-table {
-            width: 100%;
-            min-width: 800px;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .search-wrap input {
+            height: 44px; /* Dễ bấm hơn trên mobile */
         }
 
-        .fish-table th {
-            text-align: left;
-            padding: 15px;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            background: rgba(0, 0, 0, 0.02);
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .fish-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid var(--border-color);
-            vertical-align: middle;
-        }
-
-        .id-btn {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: #fff;
-            border: none;
+        .table-container {
+            padding: 10px;
             border-radius: 8px;
-            padding: 6px 12px;
-            font-weight: 800;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(14, 62, 218, 0.2);
         }
 
-        .fish-name-cell {
-            border-radius: 10px;
-            padding: 8px 12px !important;
-            font-weight: 700;
-            font-size: 1.3rem;
-            display: inline-block;
-            margin: 2px;
+        .blue-table {
+            font-size: 13px;
         }
 
-        @media (max-width: 768px) {
-            .action-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .search-box {
-                max-width: none;
-            }
+        .blue-table th, .blue-table td {
+            padding: 6px 8px;
         }
+
+        .update-time {
+            text-align: center;
+            width: 100%;
+        }
+    }
     </style>
 
-    <x-hero-header title="KHO DỮ LIỆU ID CÁ" description="Danh sách ID cá được cập nhật liên tục từ máy chủ." />
+    @php
+        function gradeColor($grade)
+        {
+            return match ((int) $grade) {
+                // Thường
+                1 => '#f2faf3ff',   // xanh lá nhạt (giống nền cá thường)
 
-    <div class="tools-sub-container">
-        <div class="glass-card">
-            <div class="filter-grid">
-                <div class="switch-group">
-                    <label class="glass-toggle">
+                // Hiếm
+                2 => '#6EE7B7',   // xanh ngọc (emerald)
+
+                // Cực hiếm
+                3 => '#93C5FD',   // xanh dương dịu
+
+                // VIP
+                4 => '#E9A8F2',   // tím hồng (rất giống game)
+
+                // VVIP
+                5 => 'linear-gradient(135deg,
+                    #F9A8D4,
+                    #FDE68A,
+                    #6EE7B7,
+                    #93C5FD,
+                    #E9A8F2
+                )',
+
+                default => '#E5E7EB',
+            };
+        }
+
+        function gradeTextColor($grade)
+        {
+            return match ((int) $grade) {
+                1 => '#14532D', // xanh đậm
+                2 => '#065F46', // emerald đậm
+                3 => '#1E3A8A', // xanh dương đậm
+                4 => '#701A75', // tím đậm
+                5 => '#1F2937', // xám đậm (dễ đọc trên gradient)
+                default => '#1F2937',
+            };
+        }
+    @endphp
+
+    <div class="container mt-4 table-container">
+        <x-hero-header title="Danh Sách ID" description="" />
+
+        <div class="filter-controls">
+            <div class="switch-container">
+                <label class="switch-item">
+                    <div class="switch">
                         <input type="checkbox" id="type_fish" class="type-check" value="fish" checked>
-                        <span><i class="fas fa-fish"></i> Cá</span>
-                    </label>
-                    <label class="glass-toggle">
-                        <input type="checkbox" id="type_trash" class="type-check" value="trash">
-                        <span><i class="fas fa-trash-alt"></i> Rác</span>
-                    </label>
-                </div>
+                        <span class="slider fish"></span>
+                    </div>
+                    <span class="switch-text">Cá</span>
+                </label>
 
-                <div class="grade-filters">
-                    <label class="grade-pill g1">
-                        <input type="checkbox" class="grade-check" value="1" checked> Trắng
-                    </label>
-                    <label class="grade-pill g2">
-                        <input type="checkbox" class="grade-check" value="2" checked> Xanh Lá
-                    </label>
-                    <label class="grade-pill g3">
-                        <input type="checkbox" class="grade-check" value="3" checked> Xanh Dương
-                    </label>
-                    <label class="grade-pill g4">
-                        <input type="checkbox" class="grade-check" value="4" checked> Tím (VIP)
-                    </label>
-                    <label class="grade-pill g5">
-                        <input type="checkbox" class="grade-check" value="5" checked> Cầu Vồng (VVIP)
-                    </label>
-                </div>
+                <label class="switch-item">
+                    <div class="switch">
+                        <input type="checkbox" id="type_trash" class="type-check" value="trash">
+                        <span class="slider trash"></span>
+                    </div>
+                    <span class="switch-text">Rác</span>
+                </label>
             </div>
 
-            <div class="action-row">
-                <button class="btn btn--primary" id="copyAllIds" style="padding: 12px 24px;">
-                    <i class="fas fa-copy"></i> Sao chép ID đã lọc
+            <hr class="filter-separator">
+
+            <div class="grade-checkboxes">
+                <input type="checkbox" id="g1" class="grade-check" value="1" checked>
+                <label for="g1" class="grade-label label-g1">Trắng</label>
+
+                <input type="checkbox" id="g2" class="grade-check" value="2" checked>
+                <label for="g2" class="grade-label label-g2">Xanh Lá</label>
+
+                <input type="checkbox" id="g3" class="grade-check" value="3" checked>
+                <label for="g3" class="grade-label label-g3">Xanh Dương</label>
+
+                <input type="checkbox" id="g4" class="grade-check" value="4" checked>
+                <label for="g4" class="grade-label label-g4">Tím (VIP)</label>
+
+                <input type="checkbox" id="g5" class="grade-check" value="5" checked>
+                <label for="g5" class="grade-label label-g5">Cầu Vồng (VVIP)</label>
+            </div>
+
+            <div class="action-bar">
+                <button type="button" class="copy-btn" id="copyAllIds">
+                    <i class="fas fa-copy"></i> Sao Chép ID Đã Lọc
                 </button>
-                <div class="search-box">
+
+                <div class="search-wrap">
                     <i class="fas fa-search"></i>
-                    <input type="text" id="searchInput" placeholder="Tìm kiếm cá hoặc ID...">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm ID hoặc tên cá..." class="form-control">
                 </div>
+
                 @if($lastUpdated)
-                    <div style="font-size: 1.1rem; color: var(--text-light); font-weight: 700;">
-                        <i class="fas fa-sync"></i> {{ \Carbon\Carbon::parse($lastUpdated)->format('H:i d/m/Y') }}
+                    <div class="update-time" style="font-size: 12px; color: #94A3B8; font-weight: 600;">
+                        CẬP NHẬT: {{ \Carbon\Carbon::parse($lastUpdated)->format('H:i d/m/Y') }}
                     </div>
                 @endif
             </div>
-
-            <div style="overflow-x: auto;">
-                <table class="fish-table" id="mainTable">
-                    <thead>
-                        <tr>
-                            <th style="width: 50px;"><input type="checkbox" id="selectAll" checked></th>
-                            <th style="width: 100px;">ID</th>
-                            <th>Danh Sách Cá / Vật Phẩm</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $allMaps = [];
-                            foreach ($fishMap as $id => $items) {
-                                foreach ($items as $item) {
-                                    $allMaps[$id][] = array_merge($item, ['type' => 'fish']);
-                                }
-                            }
-                            foreach ($trashMap as $id => $items) {
-                                foreach ($items as $item) {
-                                    $allMaps[$id][] = array_merge($item, ['type' => 'trash']);
-                                }
-                            }
-                            ksort($allMaps);
-                        @endphp
-
-                        @foreach($allMaps as $id => $items)
-                            @php $rowTypes = array_unique(array_column($items, 'type')); @endphp
-                            <tr class="fish-row" data-types="{{ json_encode($rowTypes) }}">
-                                <td><input type="checkbox" class="row-checkbox" checked></td>
-                                <td><button class="id-btn copy-id" data-id="{{ $id }}">{{ $id }}</button></td>
-                                <td>
-                                    @foreach($items as $item)
-                                        @php
-                                            $colorClass = match ((int) $item['grade']) { 1 => 'g1', 2 => 'g2', 3 => 'g3', 4 => 'g4', 5 => 'g5', default => 'g1'};
-                                        @endphp
-                                        <span class="fish-name-cell {{ $colorClass }} fish-item" data-grade="{{ $item['grade'] }}"
-                                            data-type="{{ $item['type'] }}">
-                                            {{ $item['name'] }}
-                                        </span>
-                                    @endforeach
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
         </div>
+
+        <table class="blue-table">
+            <thead>
+                <tr>
+                    <th class="check-col">
+                        <input type="checkbox" id="selectAll" checked title="Chọn tất cả đang hiển thị">
+                    </th>
+                    <th style="width: 80px;">ID</th>
+                    @for ($i = 1; $i <= $maxTypes; $i++)
+                        <th>Loại {{ $i }}</th>
+                    @endfor
+                </tr>
+            </thead>
+
+            <tbody id="mainTable">
+            @php
+                $allMaps = [];
+                foreach ($fishMap as $id => $items) {
+                    foreach ($items as $item) {
+                        $allMaps[$id][] = array_merge($item, ['type' => 'fish']);
+                    }
+                }
+                foreach ($trashMap as $id => $items) {
+                    foreach ($items as $item) {
+                        $allMaps[$id][] = array_merge($item, ['type' => 'trash']);
+                    }
+                }
+                ksort($allMaps);
+            @endphp
+
+            @foreach($allMaps as $id => $items)
+                @php
+                    $rowTypes = array_unique(array_column($items, 'type'));
+                @endphp
+                <tr class="fish-row" data-types="{{ json_encode($rowTypes) }}">
+                    <td class="check-col">
+                        <input type="checkbox" class="row-checkbox" checked>
+                    </td>
+                    <td class="id-cell" style="cursor: pointer; font-weight: bold; position: relative;" title="Click để copy ID">
+                        {{ $id }}
+                    </td>
+                    @foreach($items as $item)
+                        <td class="fish-cell" 
+                            data-grade="{{ $item['grade'] }}"
+                            data-type="{{ $item['type'] }}"
+                            style="
+                            background: {{ gradeColor($item['grade']) }};
+                            color: {{ gradeTextColor($item['grade']) }};
+                            font-weight: {{ $item['grade'] >= 4 ? 'bold' : 'normal' }};
+                        ">
+                            {{ $item['name'] }}
+                        </td>
+                    @endforeach
+
+                    @for ($i = count($items); $i < $maxTypes; $i++)
+                        <td class="empty-cell"></td>
+                    @endfor
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const searchInput = document.getElementById('searchInput');
-            const gradeChecks = document.querySelectorAll('.grade-check');
-            const typeChecks = document.querySelectorAll('.type-check');
-            const rows = document.querySelectorAll('.fish-row');
+    document.addEventListener('DOMContentLoaded', () => {
+        const input = document.getElementById('searchInput');
+        const selectAll = document.getElementById('selectAll');
+        const gradeChecks = document.querySelectorAll('.grade-check');
+        const typeChecks = document.querySelectorAll('.type-check');
+        const copyBtn = document.getElementById('copyAllIds');
+        const mainTable = document.getElementById('mainTable');
+        const rows = mainTable.querySelectorAll('.fish-row');
 
-            function filter() {
-                const keyword = searchInput.value.toLowerCase();
-                const activeGrades = Array.from(gradeChecks).filter(c => c.checked).map(c => c.value);
-                const activeTypes = Array.from(typeChecks).filter(c => c.checked).map(c => c.value);
+        function filterRows() {
+            const keyword = input.value.trim().toLowerCase();
+            const activeGrades = Array.from(gradeChecks)
+                .filter(c => c.checked)
+                .map(c => parseInt(c.value));
 
-                rows.forEach(row => {
-                    let hasMatch = false;
-                    const items = row.querySelectorAll('.fish-item');
-                    const rowId = row.querySelector('.copy-id').dataset.id;
+            const activeTypes = Array.from(typeChecks)
+                .filter(c => c.checked)
+                .map(c => c.value);
 
-                    items.forEach(item => {
-                        const grade = item.dataset.grade;
-                        const type = item.dataset.type;
-                        const name = item.textContent.toLowerCase();
+            rows.forEach(row => {
+                const idCell = row.querySelector('.id-cell');
+                const fishCells = row.querySelectorAll('.fish-cell');
+                const emptyCells = row.querySelectorAll('.empty-cell');
+                const idText = idCell.innerText.trim().toLowerCase();
 
-                        const matchGrade = activeGrades.includes(grade);
-                        const matchType = activeTypes.includes(type);
-                        const matchSearch = !keyword || name.includes(keyword) || rowId.includes(keyword);
+                let rowHasMatchingFish = false;
 
-                        if (matchGrade && matchType && matchSearch) {
-                            item.style.display = 'inline-block';
-                            hasMatch = true;
-                        } else {
-                            item.style.display = 'none';
-                        }
-                    });
+                fishCells.forEach(cell => {
+                    const grade = parseInt(cell.dataset.grade);
+                    const type = cell.dataset.type;
+                    const name = cell.innerText.trim().toLowerCase();
 
-                    row.style.display = hasMatch ? '' : 'none';
-                });
-            }
+                    const matchGrade = activeGrades.includes(grade);
+                    const matchType = activeTypes.includes(type);
+                    const matchKeyword = keyword === '' || name.includes(keyword) || idText.includes(keyword);
 
-            searchInput.addEventListener('input', filter);
-            gradeChecks.forEach(c => c.addEventListener('change', filter));
-            typeChecks.forEach(c => c.addEventListener('change', filter));
-
-            // Copy handlers
-            document.querySelectorAll('.copy-id').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    navigator.clipboard.writeText(btn.dataset.id);
-                    showToast(`Đã copy ID: ${btn.dataset.id}`);
-                });
-            });
-
-            document.getElementById('copyAllIds').addEventListener('click', () => {
-                const ids = [];
-                document.querySelectorAll('.fish-row').forEach(row => {
-                    if (row.style.display !== 'none' && row.querySelector('.row-checkbox').checked) {
-                        ids.push(row.querySelector('.copy-id').dataset.id);
+                    if (matchGrade && matchType && matchKeyword) {
+                        cell.style.display = '';
+                        rowHasMatchingFish = true;
+                    } else {
+                        cell.style.display = 'none';
                     }
                 });
-                if (ids.length > 0) {
-                    navigator.clipboard.writeText(ids.join(','));
-                    showToast(`Đã copy ${ids.length} ID`);
+
+                if (rowHasMatchingFish) {
+                    row.style.display = '';
+                    emptyCells.forEach(c => c.style.display = 'none');
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        input.addEventListener('input', filterRows);
+        gradeChecks.forEach(check => check.addEventListener('change', filterRows));
+        typeChecks.forEach(check => check.addEventListener('change', filterRows));
+
+        copyBtn.addEventListener('click', () => {
+            const visibleCheckedIds = [];
+            rows.forEach(row => {
+                if (row.style.display !== 'none') {
+                    const checkbox = row.querySelector('.row-checkbox');
+                    if (checkbox && checkbox.checked) {
+                        const id = row.querySelector('.id-cell').innerText.trim();
+                        visibleCheckedIds.push(id);
+                    }
                 }
             });
 
-            document.getElementById('selectAll').addEventListener('change', e => {
-                document.querySelectorAll('.fish-row').forEach(row => {
-                    if (row.style.display !== 'none') {
-                        row.querySelector('.row-checkbox').checked = e.target.checked;
-                    }
-                });
-            });
-
-            function showToast(msg) {
-                const toast = document.createElement('div');
-                toast.style = 'position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:rgba(14,62,218,0.9); color:#fff; padding:12px 24px; border-radius:100px; z-index:10000; font-weight:800; backdrop-filter:blur(10px); box-shadow:0 10px 30px rgba(0,0,0,0.2);';
-                toast.innerHTML = `<i class="fas fa-check-circle mr-2"></i> ${msg}`;
-                document.body.appendChild(toast);
-                setTimeout(() => toast.remove(), 2000);
+            if (visibleCheckedIds.length === 0) {
+                alert('Vui lòng chọn ít nhất một ID để copy!');
+                return;
             }
 
-            filter();
+            const textToCopy = visibleCheckedIds.join(',');
+            copyToClipboard(textToCopy, `Đã Sao Chép ${visibleCheckedIds.length} ID`);
         });
+
+        selectAll.addEventListener('change', () => {
+            const isChecked = selectAll.checked;
+            rows.forEach(row => {
+                if (row.style.display !== 'none') {
+                    const cb = row.querySelector('.row-checkbox');
+                    if (cb) cb.checked = isChecked;
+                }
+            });
+        });
+
+        document.querySelectorAll('.id-cell').forEach(cell => {
+            cell.addEventListener('click', () => {
+                const id = cell.innerText.trim();
+                copyToClipboard(id, `Đã copy ID: ${id}`);
+            });
+        });
+
+        function copyToClipboard(text, successMsg) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const alertDiv = document.createElement('div');
+                alertDiv.style = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.8); color:#fff; padding:10px 20px; border-radius:30px; z-index:9999; font-weight:bold; font-size:14px;';
+                alertDiv.innerText = successMsg;
+                document.body.appendChild(alertDiv);
+                setTimeout(() => alertDiv.remove(), 2000);
+            } catch (err) {
+                console.error('Không thể copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        filterRows();
+    });
     </script>
+
 @endsection

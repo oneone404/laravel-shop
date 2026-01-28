@@ -3,159 +3,135 @@
 @section('title', 'Danh Sách ID Vùng Câu')
 
 @section('content')
-    <style>
-        .tools-sub-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+<style>
+.table-container {
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+    overflow: hidden;
+    border: 1px solid #cbd5e1;
+}
 
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: var(--glass-shadow);
-        }
+.table-title {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0;
+    color: #1e3a8a;
+}
 
-        .search-wrapper {
-            position: relative;
-            margin-bottom: 30px;
-        }
+.blue-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 15px;
+}
 
-        .search-wrapper i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-light);
-            font-size: 1.6rem;
-        }
+.blue-table thead {
+    background-color: #1d4ed8;
+    color: #ffffff;
+}
 
-        .glass-search {
-            width: 100%;
-            padding: 15px 20px 15px 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+.blue-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    border: 1px solid #cbd5e1;
+}
 
-        .dark-mode .glass-search {
-            background: rgba(0, 0, 0, 0.2);
-            color: #fff;
-        }
+.blue-table td {
+    padding: 12px 16px;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+}
 
-        .glass-search:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(14, 62, 218, 0.1);
-        }
+.blue-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
 
-        .custom-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+.blue-table tbody tr:hover {
+    background-color: #e0f2fe;
+}
 
-        .custom-table th {
-            text-align: left;
-            padding: 15px 20px;
-            color: var(--text-light);
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid var(--border-color);
-        }
+.pretty-id {
+    font-weight: 600;
+    color: #2563eb;
+}
 
-        .custom-table td {
-            padding: 15px 20px;
-            color: var(--text-color);
-            font-size: 1.5rem;
-            font-weight: 600;
-            border-bottom: 1px solid var(--border-color);
-            transition: background 0.2s ease;
-        }
+.pretty-name {
+    color: #334155;
+}
 
-        .dark-mode .custom-table td {
-            color: #e2e8f0;
-        }
+.blue-table thead tr:first-child th:first-child {
+    border-top-left-radius: 8px;
+}
+.blue-table thead tr:first-child th:last-child {
+    border-top-right-radius: 8px;
+}
+.blue-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+.blue-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
 
-        .id-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-            color: #fff;
-            border-radius: 8px;
-            font-weight: 800;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 10px rgba(14, 62, 218, 0.2);
-        }
+.search-input {
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+}
+</style>
 
-        .region-name {
-            font-weight: 700;
-            color: var(--primary-color);
-        }
+<div class="container mt-4 table-container">
+    <x-hero-header title="Danh Sách ID" description="" />
 
-        .dark-mode .region-name {
-            color: #4df2ff;
-        }
+    <input type="text" id="searchInput" class="search-input" placeholder="Tìm Kiếm ID Hoặc Tên Vùng Câu">
 
-        .custom-table tr:hover td {
-            background: rgba(14, 62, 218, 0.03);
-        }
+    <table class="blue-table">
+        <thead>
+            <tr>
+                <th style="width: 100px;">ID</th>
+                <th>Vùng Câu</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($fakeIds as $fake)
+            <tr>
+                <td class="pretty-id">{{ $fake['id'] ?? '...' }}</td>
+                <td class="pretty-name">{{ $fake['name'] }}</td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
 
-        .dark-mode .custom-table tr:hover td {
-            background: rgba(255, 255, 255, 0.03);
-        }
-    </style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const rows = document.querySelectorAll('.blue-table tbody tr');
 
-    <x-hero-header title="ID VÙNG CÂU" description="Tra cứu mã ID vùng câu để sử dụng các tính năng hỗ trợ trong game." />
+    searchInput.addEventListener('input', () => {
+        const keyword = searchInput.value.trim().toLowerCase();
 
-    <div class="tools-sub-container">
-        <div class="glass-card">
-            <div class="search-wrapper">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" class="glass-search" placeholder="Tìm kiếm ID hoặc tên vùng câu...">
-            </div>
+        rows.forEach(row => {
+            const idCell = row.querySelector('td.pretty-id');
+            const nameCell = row.querySelector('td.pretty-name');
+            const idText = idCell.textContent.trim().toLowerCase();
+            const nameText = nameCell.textContent.trim().toLowerCase();
 
-            <div style="overflow-x: auto;">
-                <table class="custom-table" id="idTable">
-                    <thead>
-                        <tr>
-                            <th style="width: 120px;">ID</th>
-                            <th>Tên Vùng Câu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($fakeIds as $fake)
-                            <tr>
-                                <td>
-                                    <span class="id-badge">{{ $fake['id'] ?? '...' }}</span>
-                                </td>
-                                <td class="region-name">{{ $fake['name'] }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('searchInput').addEventListener('input', function () {
-            const keyword = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#idTable tbody tr');
-
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(keyword) ? '' : 'none';
-            });
+            if (idText.includes(keyword) || nameText.includes(keyword)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
         });
-    </script>
+    });
+});
+</script>
+
 @endsection
