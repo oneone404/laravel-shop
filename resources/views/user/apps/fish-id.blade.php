@@ -1,8 +1,6 @@
 @extends('layouts.user.app')
 
-@section('title', 'Danh Sách ID')@section('content')@push('css')
-        <link rel="stylesheet" href="{{ asset('assets/css/apps.css') }}">
-    @endpush
+@section('title', 'Danh Sách ID')@section('content')
 
     @php
         function gradeColor($grade)
@@ -22,12 +20,12 @@
 
                 // VVIP
                 5 => 'linear-gradient(135deg,
-                                    #F9A8D4,
-                                    #FDE68A,
-                                    #6EE7B7,
-                                    #93C5FD,
-                                    #E9A8F2
-                                )',
+                                                    #F9A8D4,
+                                                    #FDE68A,
+                                                    #6EE7B7,
+                                                    #93C5FD,
+                                                    #E9A8F2
+                                                )',
 
                 default => '#E5E7EB',
             };
@@ -45,10 +43,9 @@
             };
         }
     @endphp
+    <x-hero-header title="Danh Sách ID" description="" />
 
     <div class="container mt-4 table-fish-container">
-        <x-hero-header title="Danh Sách ID" description="" />
-
         <div class="filter-controls">
             <div class="switch-container">
                 <label class="switch-item">
@@ -148,10 +145,10 @@
                         </td>
                         @foreach($items as $item)
                             <td class="fish-cell" data-grade="{{ $item['grade'] }}" data-type="{{ $item['type'] }}" style="
-                                                    background: {{ gradeColor($item['grade']) }};
-                                                    color: {{ gradeTextColor($item['grade']) }};
-                                                    font-weight: {{ $item['grade'] >= 4 ? 'bold' : 'normal' }};
-                                                ">
+                                                                            background: {{ gradeColor($item['grade']) }};
+                                                                            color: {{ gradeTextColor($item['grade']) }};
+                                                                            font-weight: {{ $item['grade'] >= 4 ? 'bold' : 'normal' }};
+                                                                        ">
                                 {{ $item['name'] }}
                             </td>
                         @endforeach

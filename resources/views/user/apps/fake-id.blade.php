@@ -3,13 +3,10 @@
 @section('title', 'Danh Sách ID Vùng Câu')
 
 @section('content')
-    @push('css')
-        <link rel="stylesheet" href="{{ asset('assets/css/apps.css') }}">
-    @endpush
+
+    <x-hero-header title="Danh Sách ID" description="" />
 
     <div class="container mt-4 table-container">
-        <x-hero-header title="Danh Sách ID" description="" />
-
         <input type="text" id="searchInput" class="search-input" placeholder="Tìm Kiếm ID Hoặc Tên Vùng Câu">
 
         <table class="blue-table">

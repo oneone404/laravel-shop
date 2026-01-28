@@ -149,7 +149,7 @@
 /* 2. Gift Code Tool (gift-code.blade.php)
    ========================================================================== */
 .gift-code-container {
-    max-width: 600px;
+    max-width: 850px;
     margin: 40px auto;
     padding: 0 20px;
 }
@@ -250,6 +250,113 @@
 .alert-info {
     background: rgba(59, 130, 246, 0.1);
     color: #3b82f6;
+}
+
+.glass-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px 20px;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    font-weight: 500;
+    font-family: 'Courier New', Courier, monospace;
+    transition: all 0.3s ease;
+    resize: vertical;
+    min-height: 120px;
+}
+
+.dark-mode .glass-textarea {
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.glass-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(14, 62, 218, 0.1);
+}
+
+.helper-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-top: 6px;
+    font-style: italic;
+}
+
+.bulk-results {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.result-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.35rem;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-id {
+    font-weight: 700;
+    color: var(--primary-color);
+    width: 140px;
+}
+
+.result-code {
+    font-family: monospace;
+    color: var(--text-color);
+    flex: 1;
+    margin: 0 10px;
+}
+
+.result-status {
+    font-weight: 600;
+    text-align: right;
+}
+
+.status-pending {
+    color: var(--text-light);
+}
+
+.status-success {
+    color: #10b981;
+}
+
+.status-error {
+    color: #ef4444;
+}
+
+.import-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .import-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* 3. Table Tools (Fish ID & Fake ID)

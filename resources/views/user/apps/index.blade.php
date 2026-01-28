@@ -3,9 +3,6 @@
 @section('title', 'Trung Tâm Công Cụ')
 
 @section('content')
-    @push('css')
-        <link rel="stylesheet" href="{{ asset('assets/css/apps.css') }}">
-    @endpush
 
     <x-hero-header title="TRUNG TÂM CÔNG CỤ"
         description="Khám phá các công cụ hỗ trợ trải nghiệm game tối ưu nhất cho game thủ." />

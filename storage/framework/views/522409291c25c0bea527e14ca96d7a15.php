@@ -129,6 +129,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/responsive-fixes.css')); ?>?v=<?php echo e($css_ver); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/mobile-menu.css')); ?>?v=<?php echo e($css_ver); ?>" />
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/header-responsive.css')); ?>?v=<?php echo e($css_ver); ?>" />
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/apps.css')); ?>?v=<?php echo e($css_ver); ?>" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -173,27 +174,26 @@
 
     <?php if(request()->is('/')): ?>
         <script type="application/ld+json">
-                                                {
-                                                    "@context": "https://schema.org",
-                                                    "@type": "Organization",
-                                                    "name": "<?php echo e(config_get('site_name')); ?>",
-                                                    "url": "<?php echo e(url('/')); ?>",
-                                                    "logo": "<?php echo e(config_get('site_logo')); ?>",
-                                                    "contactPoint": {
-                                                        "@type": "ContactPoint",
-                                                        "telephone": "<?php echo e(config_get('phone')); ?>",
-                                                        "contactType": "customer service",
-                                                        "availableLanguage": "Vietnamese"
-                                                    },
-                                                    "sameAs": [
-                                                        "<?php echo e(config_get('facebook')); ?>",
-                                                        "<?php echo e(config_get('youtube')); ?>"
-                                                    ]
-                                                }
-                                            </script>
+                                                    {
+                                                        "@context": "https://schema.org",
+                                                        "@type": "Organization",
+                                                        "name": "<?php echo e(config_get('site_name')); ?>",
+                                                        "url": "<?php echo e(url('/')); ?>",
+                                                        "logo": "<?php echo e(config_get('site_logo')); ?>",
+                                                        "contactPoint": {
+                                                            "@type": "ContactPoint",
+                                                            "telephone": "<?php echo e(config_get('phone')); ?>",
+                                                            "contactType": "customer service",
+                                                            "availableLanguage": "Vietnamese"
+                                                        },
+                                                        "sameAs": [
+                                                            "<?php echo e(config_get('facebook')); ?>",
+                                                            "<?php echo e(config_get('youtube')); ?>"
+                                                        ]
+                                                    }
+                                                </script>
     <?php endif; ?>
 
     <!-- Page-specific CSS -->
     <?php echo $__env->yieldPushContent('css'); ?>
-</head>
-<?php /**PATH C:\Users\LEGION\Documents\Sources\shop\resources\views/layouts/user/head.blade.php ENDPATH**/ ?>
+</head><?php /**PATH C:\Users\LEGION\Documents\Sources\shop\resources\views/layouts/user/head.blade.php ENDPATH**/ ?>

@@ -131,6 +131,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive-fixes.css') }}?v={{ $css_ver }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/mobile-menu.css') }}?v={{ $css_ver }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/header-responsive.css') }}?v={{ $css_ver }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/apps.css') }}?v={{ $css_ver }}" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -175,24 +176,24 @@
 
     @if (request()->is('/'))
         <script type="application/ld+json">
-                                                {
-                                                    "@context": "https://schema.org",
-                                                    "@type": "Organization",
-                                                    "name": "{{ config_get('site_name') }}",
-                                                    "url": "{{ url('/') }}",
-                                                    "logo": "{{ config_get('site_logo') }}",
-                                                    "contactPoint": {
-                                                        "@type": "ContactPoint",
-                                                        "telephone": "{{ config_get('phone') }}",
-                                                        "contactType": "customer service",
-                                                        "availableLanguage": "Vietnamese"
-                                                    },
-                                                    "sameAs": [
-                                                        "{{ config_get('facebook') }}",
-                                                        "{{ config_get('youtube') }}"
-                                                    ]
-                                                }
-                                            </script>
+                                                    {
+                                                        "@context": "https://schema.org",
+                                                        "@type": "Organization",
+                                                        "name": "{{ config_get('site_name') }}",
+                                                        "url": "{{ url('/') }}",
+                                                        "logo": "{{ config_get('site_logo') }}",
+                                                        "contactPoint": {
+                                                            "@type": "ContactPoint",
+                                                            "telephone": "{{ config_get('phone') }}",
+                                                            "contactType": "customer service",
+                                                            "availableLanguage": "Vietnamese"
+                                                        },
+                                                        "sameAs": [
+                                                            "{{ config_get('facebook') }}",
+                                                            "{{ config_get('youtube') }}"
+                                                        ]
+                                                    }
+                                                </script>
     @endif
 
     <!-- Page-specific CSS -->

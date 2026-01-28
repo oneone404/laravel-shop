@@ -1,8 +1,6 @@
 
 
-<?php $__env->startSection('title', 'Danh Sách ID'); ?><?php $__env->startSection('content'); ?><?php $__env->startPush('css'); ?>
-        <link rel="stylesheet" href="<?php echo e(asset('assets/css/apps.css')); ?>">
-    <?php $__env->stopPush(); ?>
+<?php $__env->startSection('title', 'Danh Sách ID'); ?><?php $__env->startSection('content'); ?>
 
     <?php
         function gradeColor($grade)
@@ -22,12 +20,12 @@
 
                 // VVIP
                 5 => 'linear-gradient(135deg,
-                                    #F9A8D4,
-                                    #FDE68A,
-                                    #6EE7B7,
-                                    #93C5FD,
-                                    #E9A8F2
-                                )',
+                                                    #F9A8D4,
+                                                    #FDE68A,
+                                                    #6EE7B7,
+                                                    #93C5FD,
+                                                    #E9A8F2
+                                                )',
 
                 default => '#E5E7EB',
             };
@@ -45,9 +43,7 @@
             };
         }
     ?>
-
-    <div class="container mt-4 table-fish-container">
-        <?php if (isset($component)) { $__componentOriginal676d920e8bb32a4c96cd6e6c6ba00de0 = $component; } ?>
+    <?php if (isset($component)) { $__componentOriginal676d920e8bb32a4c96cd6e6c6ba00de0 = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal676d920e8bb32a4c96cd6e6c6ba00de0 = $attributes; } ?>
 <?php $component = App\View\Components\HeroHeader::resolve(['title' => 'Danh Sách ID','description' => ''] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('hero-header'); ?>
@@ -68,6 +64,7 @@
 <?php unset($__componentOriginal676d920e8bb32a4c96cd6e6c6ba00de0); ?>
 <?php endif; ?>
 
+    <div class="container mt-4 table-fish-container">
         <div class="filter-controls">
             <div class="switch-container">
                 <label class="switch-item">
@@ -169,10 +166,10 @@
                         </td>
                         <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <td class="fish-cell" data-grade="<?php echo e($item['grade']); ?>" data-type="<?php echo e($item['type']); ?>" style="
-                                                    background: <?php echo e(gradeColor($item['grade'])); ?>;
-                                                    color: <?php echo e(gradeTextColor($item['grade'])); ?>;
-                                                    font-weight: <?php echo e($item['grade'] >= 4 ? 'bold' : 'normal'); ?>;
-                                                ">
+                                                                            background: <?php echo e(gradeColor($item['grade'])); ?>;
+                                                                            color: <?php echo e(gradeTextColor($item['grade'])); ?>;
+                                                                            font-weight: <?php echo e($item['grade'] >= 4 ? 'bold' : 'normal'); ?>;
+                                                                        ">
                                 <?php echo e($item['name']); ?>
 
                             </td>
