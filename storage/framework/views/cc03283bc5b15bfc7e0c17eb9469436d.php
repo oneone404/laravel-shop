@@ -1,10 +1,10 @@
-@extends('layouts.user.app')
 
-@section('title', 'Danh Sách ID')@section('content')@push('css')
-        <link rel="stylesheet" href="{{ asset('assets/css/apps.css') }}">
-    @endpush
 
-    @php
+<?php $__env->startSection('title', 'Danh Sách ID'); ?><?php $__env->startSection('content'); ?><?php $__env->startPush('css'); ?>
+        <link rel="stylesheet" href="<?php echo e(asset('assets/css/apps.css')); ?>">
+    <?php $__env->stopPush(); ?>
+
+    <?php
         function gradeColor($grade)
         {
             return match ((int) $grade) {
@@ -44,10 +44,29 @@
                 default => '#1F2937',
             };
         }
-    @endphp
+    ?>
 
     <div class="container mt-4 table-fish-container">
-        <x-hero-header title="Danh Sách ID" description="" />
+        <?php if (isset($component)) { $__componentOriginal676d920e8bb32a4c96cd6e6c6ba00de0 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal676d920e8bb32a4c96cd6e6c6ba00de0 = $attributes; } ?>
+<?php $component = App\View\Components\HeroHeader::resolve(['title' => 'Danh Sách ID','description' => ''] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('hero-header'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(App\View\Components\HeroHeader::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal676d920e8bb32a4c96cd6e6c6ba00de0)): ?>
+<?php $attributes = $__attributesOriginal676d920e8bb32a4c96cd6e6c6ba00de0; ?>
+<?php unset($__attributesOriginal676d920e8bb32a4c96cd6e6c6ba00de0); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal676d920e8bb32a4c96cd6e6c6ba00de0)): ?>
+<?php $component = $__componentOriginal676d920e8bb32a4c96cd6e6c6ba00de0; ?>
+<?php unset($__componentOriginal676d920e8bb32a4c96cd6e6c6ba00de0); ?>
+<?php endif; ?>
 
         <div class="filter-controls">
             <div class="switch-container">
@@ -97,11 +116,12 @@
                     <input type="text" id="searchInput" placeholder="Tìm kiếm ID hoặc tên cá..." class="form-control">
                 </div>
 
-                @if($lastUpdated)
+                <?php if($lastUpdated): ?>
                     <div class="update-time" style="font-size: 12px; color: #94A3B8; font-weight: 600;">
-                        CẬP NHẬT: {{ \Carbon\Carbon::parse($lastUpdated)->format('H:i d/m/Y') }}
+                        CẬP NHẬT: <?php echo e(\Carbon\Carbon::parse($lastUpdated)->format('H:i d/m/Y')); ?>
+
                     </div>
-                @endif
+                <?php endif; ?>
             </div>
         </div>
 
@@ -112,14 +132,14 @@
                         <input type="checkbox" id="selectAll" checked title="Chọn tất cả đang hiển thị">
                     </th>
                     <th style="width: 80px;">ID</th>
-                    @for ($i = 1; $i <= $maxTypes; $i++)
-                        <th>Loại {{ $i }}</th>
-                    @endfor
+                    <?php for($i = 1; $i <= $maxTypes; $i++): ?>
+                        <th>Loại <?php echo e($i); ?></th>
+                    <?php endfor; ?>
                 </tr>
             </thead>
 
             <tbody id="mainTable">
-                @php
+                <?php
                     $allMaps = [];
                     foreach ($fishMap as $id => $items) {
                         foreach ($items as $item) {
@@ -132,35 +152,37 @@
                         }
                     }
                     ksort($allMaps);
-                @endphp
+                ?>
 
-                @foreach($allMaps as $id => $items)
-                    @php
+                <?php $__currentLoopData = $allMaps; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $id => $items): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php
                         $rowTypes = array_unique(array_column($items, 'type'));
-                    @endphp
-                    <tr class="fish-row" data-types="{{ json_encode($rowTypes) }}">
+                    ?>
+                    <tr class="fish-row" data-types="<?php echo e(json_encode($rowTypes)); ?>">
                         <td class="check-col">
                             <input type="checkbox" class="row-checkbox" checked>
                         </td>
                         <td class="id-cell" style="cursor: pointer; font-weight: bold; position: relative;"
                             title="Click để copy ID">
-                            {{ $id }}
-                        </td>
-                        @foreach($items as $item)
-                            <td class="fish-cell" data-grade="{{ $item['grade'] }}" data-type="{{ $item['type'] }}" style="
-                                                    background: {{ gradeColor($item['grade']) }};
-                                                    color: {{ gradeTextColor($item['grade']) }};
-                                                    font-weight: {{ $item['grade'] >= 4 ? 'bold' : 'normal' }};
-                                                ">
-                                {{ $item['name'] }}
-                            </td>
-                        @endforeach
+                            <?php echo e($id); ?>
 
-                        @for ($i = count($items); $i < $maxTypes; $i++)
+                        </td>
+                        <?php $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <td class="fish-cell" data-grade="<?php echo e($item['grade']); ?>" data-type="<?php echo e($item['type']); ?>" style="
+                                                    background: <?php echo e(gradeColor($item['grade'])); ?>;
+                                                    color: <?php echo e(gradeTextColor($item['grade'])); ?>;
+                                                    font-weight: <?php echo e($item['grade'] >= 4 ? 'bold' : 'normal'); ?>;
+                                                ">
+                                <?php echo e($item['name']); ?>
+
+                            </td>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                        <?php for($i = count($items); $i < $maxTypes; $i++): ?>
                             <td class="empty-cell"></td>
-                        @endfor
+                        <?php endfor; ?>
                     </tr>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </tbody>
         </table>
     </div>
@@ -283,4 +305,5 @@
         });
     </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.user.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\Users\LEGION\Documents\Sources\shop\resources\views/user/apps/fish-id.blade.php ENDPATH**/ ?>

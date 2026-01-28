@@ -1,0 +1,643 @@
+/* ==========================================================================
+   Apps & Tools Central Stylesheet
+   ========================================================================== */
+
+/* 1. Apps Hub Page (index.blade.php)
+   ========================================================================== */
+.tools-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.tool-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tool-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.tool-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--glass-shadow);
+    border-color: var(--primary-light);
+}
+
+.tool-card:hover::before {
+    opacity: 0.05;
+}
+
+.tool-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 10px;
+    box-shadow: 0 8px 15px rgba(14, 62, 218, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.tool-info {
+    position: relative;
+    z-index: 1;
+}
+
+.tool-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 8px;
+}
+
+.tool-desc {
+    font-size: 1.4rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    min-height: 45px;
+}
+
+.tool-action {
+    margin-top: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-tool {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.3rem;
+    transition: all 0.3s ease;
+}
+
+.tool-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(14, 62, 218, 0.1);
+    color: var(--primary-color);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.dark-mode .tool-tag {
+    background: rgba(0, 212, 255, 0.1);
+    color: #00d4ff;
+}
+
+.dark-mode .tool-name {
+    color: #fff;
+}
+
+.tool-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.2rem;
+    color: #10b981;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+}
+
+/* 2. Gift Code Tool (gift-code.blade.php)
+   ========================================================================== */
+.gift-code-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.gift-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: var(--glass-shadow);
+}
+
+.gift-card h4 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dark-mode .gift-card h4 {
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dark-mode .form-label {
+    color: var(--text-lighter);
+}
+
+.glass-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px 20px;
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.dark-mode .glass-input {
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+}
+
+.glass-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(14, 62, 218, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+#result .alert {
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 20px;
+    border: none;
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+}
+
+.alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+.alert-info {
+    background: rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+}
+
+/* 3. Table Tools (Fish ID & Fake ID)
+   ========================================================================== */
+.table-fish-container,
+.table-container {
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #cbd5e1;
+    overflow-x: auto;
+}
+
+.table-container {
+    max-width: 960px;
+    overflow: hidden;
+}
+
+.blue-table {
+    width: max-content;
+    min-width: 600px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+}
+
+.blue-table thead {
+    background-color: #1d4ed8;
+    color: #ffffff;
+}
+
+.blue-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: 600;
+    border: 1px solid #cbd5e1;
+}
+
+.blue-table td {
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    word-break: break-word;
+    white-space: normal;
+    vertical-align: middle;
+}
+
+.check-col {
+    width: 50px;
+    text-align: center;
+}
+
+.blue-table td:not(:first-child):not(.check-col) {
+    max-width: 180px;
+}
+
+.blue-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.blue-table tbody tr:hover {
+    background-color: #e0f2fe;
+}
+
+.pretty-id {
+    font-weight: 600;
+    color: #2563eb;
+}
+
+.pretty-name {
+    color: #334155;
+}
+
+.blue-table thead tr:first-child th:first-child {
+    border-top-left-radius: 8px;
+}
+
+.blue-table thead tr:first-child th:last-child {
+    border-top-right-radius: 8px;
+}
+
+.blue-table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 8px;
+}
+
+.blue-table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 8px;
+}
+
+.filter-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.grade-checkboxes {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.grade-check,
+.type-check {
+    display: none;
+}
+
+.grade-label {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    opacity: 0.6;
+}
+
+.grade-check:checked+.grade-label,
+.type-check:checked+.grade-label {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.label-g1 {
+    background: #f2faf3ff;
+    color: #14532D;
+    border: 1px solid #cbd5e1;
+}
+
+.label-g2 {
+    background: #6EE7B7;
+    color: #065F46;
+}
+
+.label-g3 {
+    background: #93C5FD;
+    color: #1E3A8A;
+}
+
+.label-g4 {
+    background: #E9A8F2;
+    color: #701A75;
+}
+
+.label-g5 {
+    background: linear-gradient(135deg, #F9A8D4, #FDE68A, #6EE7B7, #93C5FD, #E9A8F2);
+    color: #1F2937;
+}
+
+.label-fish {
+    background: #ffffff;
+    color: #166534;
+    border: 2px solid #bbf7d0;
+    font-size: 14px !important;
+}
+
+.type-check:checked+.label-fish {
+    background: #dcfce7;
+    border-color: #22c55e;
+    color: #15803d;
+}
+
+.label-trash {
+    background: #ffffff;
+    color: #475569;
+    border: 2px solid #e2e8f0;
+    font-size: 14px !important;
+}
+
+.type-check:checked+.label-trash {
+    background: #f1f5f9;
+    border-color: #64748b;
+    color: #1e293b;
+}
+
+.filter-separator {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+    margin: 10px 0;
+    border: none;
+}
+
+.switch-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 5px;
+}
+
+.switch-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.switch-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 22px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e1;
+    transition: .3s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input:checked+.slider.fish {
+    background-color: #22c55e;
+}
+
+input:checked+.slider.trash {
+    background-color: #22c55e;
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+.action-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-wrap {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-wrap i {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+}
+
+.search-wrap input {
+    padding-left: 36px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+.search-input {
+    margin-bottom: 15px;
+    width: 100%;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    padding: 8px 12px;
+}
+
+/* 4. Responsive
+   ========================================================================== */
+@media (max-width: 768px) {
+    .filter-controls {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .switch-container {
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .grade-checkboxes {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        margin-bottom: 5px !important;
+    }
+
+    .grade-label {
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+
+    .grade-label.label-g5 {
+        grid-column: span 2;
+    }
+
+    .action-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .copy-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .search-wrap {
+        max-width: none;
+    }
+
+    .search-wrap input {
+        height: 44px;
+    }
+
+    .table-fish-container,
+    .table-container {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .blue-table {
+        font-size: 13px;
+    }
+
+    .blue-table th,
+    .blue-table td {
+        padding: 6px 8px;
+    }
+
+    .update-time {
+        text-align: center;
+        width: 100%;
+    }
+}

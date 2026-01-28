@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <a href="<?php echo e(route('tools.index')); ?>" class="menu__item">
+            <a href="<?php echo e(route('apps.index')); ?>" class="menu__item">
                 <i class="fas fa-tools"></i>CÔNG CỤ
             </a>
 
